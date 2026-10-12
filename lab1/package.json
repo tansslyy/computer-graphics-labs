@@ -1,0 +1,13 @@
+{
+  "name": "graphics-lab1-v4",
+  "version": "1.0.0",
+  "description": "ЛР №1. Лінійні перетворення плоского об'єкта, варіант 4",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

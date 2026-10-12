@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР №1. Лінійні перетворення (варіант 4)</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <main class="stage">
+      <canvas id="canvas" aria-label="Креслення деталі на координатній сітці"></canvas>
+      <div class="hint">колесо миші — масштаб виду, перетягування — зсув виду</div>
+    </main>
+
+    <aside class="panel">
+      <h1>ЛР №1. Лінійні перетворення</h1>
+      <p class="sub">Варіант 4</p>
+
+      <details open><summary>Розміри деталі, мм</summary><div class="body">
+        <div class="grid2" id="f-geom"></div>
+        <div class="err" id="error"></div>
+        <button type="button" data-reset="geom">Скинути</button>
+      </div></details>
+
+      <details open><summary>Зсув</summary><div class="body">
+        <div class="grid2" id="f-move"></div>
+        <button type="button" data-reset="move">Скинути</button>
+      </div></details>
+
+      <details open><summary>Обертання навколо точки</summary><div class="body">
+        <div class="grid2" id="f-rot"></div>
+        <div class="row">
+          <button type="button" id="animate">Запустити обертання</button>
+          <button type="button" data-reset="rot">Скинути</button>
+        </div>
+      </div></details>
+
+      <details><summary>Масштабування відносно точки</summary><div class="body">
+        <div class="grid2" id="f-scale"></div>
+        <button type="button" data-reset="scale">Скинути</button>
+      </div></details>
+
+      <details><summary>Симетрія відносно точки</summary><div class="body">
+        <label class="check"><input type="checkbox" id="symOn"> увімкнути симетрію</label>
+        <div class="grid2" id="f-sym"></div>
+        <button type="button" data-reset="sym">Скинути</button>
+      </div></details>
+
+      <details open><summary>Система координат</summary><div class="body">
+        <div class="radios">
+          <label><input type="radio" name="cs" value="cartesian" checked> Декартова</label>
+          <label><input type="radio" name="cs" value="affine"> Афінна</label>
+          <label><input type="radio" name="cs" value="projective"> Проективна</label>
+        </div>
+        <fieldset id="box-aff">
+          <legend>Афінна: орти X, Y і початок O</legend>
+          <div class="grid2" id="f-aff"></div>
+          <div class="row">
+            <button type="button" id="preset-aff">Приклад з методички</button>
+            <button type="button" data-reset="aff">Скинути</button>
+          </div>
+        </fieldset>
+        <fieldset id="box-proj">
+          <legend>Проективна: орти, початок і ваги w</legend>
+          <div class="grid3" id="f-proj"></div>
+          <button type="button" data-reset="proj">Значення з методички</button>
+        </fieldset>
+      </div></details>
+
+      <details open><summary>Матриці для звіту</summary><div class="body">
+        <pre id="matrices"></pre>
+      </div></details>
+
+      <div class="row">
+        <button type="button" id="reset-all">Скинути все</button>
+        <button type="button" id="fit">Центрувати вид</button>
+      </div>
+    </aside>
+  </div>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
