@@ -13,7 +13,7 @@
  *        \_______________________ (xb,-h)|______|
  *  (0,-R1)                                      (L,-h)
  */
-import { Matrix3 } from '../math/matrix3.js';
+import { translation } from '../transformations/euclidean.js';
 import { LineStyle, arc, segment, transformPolyline } from './shapes.js';
 
 const { MAIN, HIDDEN, CENTER } = LineStyle;
@@ -61,6 +61,6 @@ export function buildDetail({ L, B, H, R1, R2, S, T }, placeX = 0, placeY = 0) {
     parts.push(segment(xb, -(h - T), L, -(h - T), HIDDEN));
   }
 
-  const place = Matrix3.translation(placeX, placeY);
+  const place = translation(placeX, placeY);
   return parts.map((p) => transformPolyline(p, place));
 }

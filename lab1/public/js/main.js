@@ -1,4 +1,7 @@
 import { Matrix3 } from '/src/math/matrix3.js';
+import {
+  translation, rotation, scaling, pointSymmetry, affineSystem, projectiveSystem,
+} from '/src/transformations/index.js';
 import { buildDetail } from '/src/geometry/detail.js';
 import { DEFAULT_PARAMS, validateParams } from '/src/geometry/detailParams.js';
 import { gridLines, axisX, axisY } from '/src/geometry/grid.js';
@@ -60,18 +63,18 @@ function resetGroup(group) {
 
 /** Рух деталі: масштаб → симетрія → обертання → зсув. */
 function detailMatrix() {
-  let m = Matrix3.scaling(num('kx'), num('ky'), num('scaleX'), num('scaleY'));
-  if ($('symOn').checked) m = m.multiply(Matrix3.pointSymmetry(num('symX'), num('symY')));
-  m = m.multiply(Matrix3.rotation(num('angle'), num('rotX'), num('rotY')));
-  return m.multiply(Matrix3.translation(num('dx'), num('dy')));
+  let m = scaling(num('kx'), num('ky'), num('scaleX'), num('scaleY'));
+  if ($('symOn').checked) m = m.multiply(pointSymmetry(num('symX'), num('symY')));
+  m = m.multiply(rotation(num('angle'), num('rotX'), num('rotY')));
+  return m.multiply(translation(num('dx'), num('dy')));
 }
 
 function coordinateSystemMatrix() {
   switch (coordinateMode()) {
     case 'affine':
-      return Matrix3.affine(num('aXx'), num('aXy'), num('aYx'), num('aYy'), num('aOx'), num('aOy'));
+      return affineSystem(num('aXx'), num('aXy'), num('aYx'), num('aYy'), num('aOx'), num('aOy'));
     case 'projective':
-      return Matrix3.projective(num('pXx'), num('pXy'), num('pWx'),
+      return projectiveSystem(num('pXx'), num('pXy'), num('pWx'),
         num('pYx'), num('pYy'), num('pWy'),
         num('pOx'), num('pOy'), num('pW0'));
     default:
