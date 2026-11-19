@@ -1,4 +1,3 @@
-/** Координатна сітка і осі. Перетворюються разом із системою координат. */
 import { LineStyle, segment } from './shapes.js';
 
 const PARTS = 40;

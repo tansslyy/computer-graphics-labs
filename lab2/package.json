@@ -1,0 +1,13 @@
+{
+  "name": "lab2-longchamps-trisectrix",
+  "version": "1.0.0",
+  "description": "ЛР №2 «Побудова чудових кривих». Варіант 4 — трисектриса Лоншама",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}
