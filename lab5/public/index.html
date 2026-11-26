@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР №5 — Проекціювання</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <main class="stage">
+    <canvas id="scene" aria-label="Проекція гранованого тіла"></canvas>
+    <div class="formula">
+      <span class="title">Ізометрія на площину y = p · огранений діамант</span>
+      <span class="eq small"><span>M = R<sub>z</sub>(ψ) · R<sub>x</sub>(φ) · M<sub>орт</sub>(y = p)</span></span>
+      <span class="eq small" id="kind"></span>
+    </div>
+    <canvas id="side" class="side" aria-label="Вид збоку на площину проекції"></canvas>
+    <div class="hint">Перетягування — зсув виду · колесо — масштаб</div>
+  </main>
+
+  <aside class="panel">
+    <section>
+      <h2>Відображення</h2>
+      <label class="row">
+        <span>Режим</span>
+        <select id="mode" class="wide-select">
+          <option value="faces">Грані</option>
+          <option value="hidden">Невидимі ребра пунктиром</option>
+          <option value="wire">Каркас</option>
+        </select>
+      </label>
+      <div class="checks">
+        <label><input type="checkbox" data-show="axes"> Осі XYZ</label>
+        <label><input type="checkbox" data-show="grid"> Сітка z = 0</label>
+        <label><input type="checkbox" data-show="ownAxes"> Власні осі тіла</label>
+        <label><input type="checkbox" data-show="side"> Вид збоку</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Параметри тіла</h2>
+      <div id="params"></div>
+    </section>
+
+    <section>
+      <h2>Евклідові перетворення</h2>
+      <div class="grid3">
+        <label>Δx <input type="number" step="10" data-tr="dx"></label>
+        <label>Δy <input type="number" step="10" data-tr="dy"></label>
+        <label>Δz <input type="number" step="10" data-tr="dz"></label>
+        <label>αx, ° <input type="number" step="5" data-tr="ax"></label>
+        <label>αy, ° <input type="number" step="5" data-tr="ay"></label>
+        <label>αz, ° <input type="number" step="5" data-tr="az"></label>
+      </div>
+      <p class="note" id="center-info"></p>
+      <div class="buttons top">
+        <button type="button" id="tr-example">Зсув 100 по X, Y + 90° по Y</button>
+        <button type="button" id="tr-reset">Скинути</button>
+      </div>
+      <details>
+        <summary>Матриця перетворення тіла W</summary>
+        <table class="matrix" id="w-matrix"></table>
+      </details>
+    </section>
+
+    <section>
+      <h2>Анімація</h2>
+      <label class="row">
+        <span>Параметр</span>
+        <select id="anim-param" class="wide-select"></select>
+      </label>
+      <div class="grid3">
+        <label>Мін <input type="number" step="1" data-anim="min"></label>
+        <label>Макс <input type="number" step="1" data-anim="max"></label>
+        <label>Крок <input type="number" step="0.1" data-anim="step"></label>
+        <label>Δx/кадр <input type="number" step="0.5" data-anim="dx"></label>
+        <label>Δy/кадр <input type="number" step="0.5" data-anim="dy"></label>
+        <label>Δz/кадр <input type="number" step="0.5" data-anim="dz"></label>
+        <label>Δαx/кадр <input type="number" step="0.5" data-anim="ax"></label>
+        <label>Δαy/кадр <input type="number" step="0.5" data-anim="ay"></label>
+        <label>Δαz/кадр <input type="number" step="0.5" data-anim="az"></label>
+      </div>
+      <div class="buttons top">
+        <button type="button" id="anim-play" aria-pressed="false">Старт</button>
+        <button type="button" id="anim-reset">До початкового</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Параметри проекції</h2>
+      <label class="row">
+        <span>ψ (Z), °</span>
+        <input type="range" min="-180" max="180" step="0.5" data-proj-range="psi">
+        <input type="number" step="1" data-proj-num="psi">
+      </label>
+      <label class="row">
+        <span>φ (X), °</span>
+        <input type="range" min="-90" max="90" step="0.5" data-proj-range="phi">
+        <input type="number" step="1" data-proj-num="phi">
+      </label>
+      <label class="row">
+        <span>p</span>
+        <input type="range" min="-300" max="300" step="1" data-proj-range="p">
+        <input type="number" step="10" data-proj-num="p">
+      </label>
+      <dl class="info" id="dist-info"></dl>
+      <div class="buttons top four">
+        <button type="button" data-preset="iso">Ізометрія</button>
+        <button type="button" data-preset="front">Спереду</button>
+        <button type="button" data-preset="top">Зверху</button>
+        <button type="button" data-preset="left">Збоку</button>
+      </div>
+      <details>
+        <summary>Матриця проекції M</summary>
+        <table class="matrix" id="p-matrix"></table>
+      </details>
+    </section>
+
+    <div class="buttons footer">
+      <button type="button" id="reset-view">Вписати у вікно</button>
+      <button type="button" id="reset-all">Скинути все</button>
+    </div>
+  </aside>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
